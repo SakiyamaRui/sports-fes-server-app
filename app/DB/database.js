@@ -9,6 +9,15 @@ let publicDatabaseTemp = {
     charset: 'utf8'
 }
 
+let serverDatabase = {
+    connectionLimit: 3,
+    host: 'private.humfg.tyo2.database-hosting.conoha.io',
+    user: 'humfg_sports_fes_app',
+    password: 'Ub|9ZLG(6',
+    database: 'humfg_sports_fes',
+    charset: 'utf8'
+}
+
 let localDatabase = {
     connectionLimit: 4,         // 最大コネクション数
     host: 'localhost',          // DBホスト
@@ -18,7 +27,7 @@ let localDatabase = {
     charset: 'utf8mb4',         // サーバーの文字セット
 };
 
-const dbPool = createPool(localDatabase);
+const dbPool = createPool(serverDatabase);
 
 const getConnection = () => {
     return new Promise((resolve, reject) => {

@@ -11,6 +11,7 @@ const checkRosterAccessCheck = async (req, res, team_id, isAPI = false) => {
         if (isAPI) {
             res.json(403, {
                 redirect: redirectTo + return_to,
+                type: 'not_login',
             });
             return false;
         }else {

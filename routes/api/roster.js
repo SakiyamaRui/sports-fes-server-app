@@ -18,6 +18,10 @@ router.get('/getList', async (req, res) => {
             return false;
         }
 
+        if (permissionResult == 'Access denied') {
+            return false;
+        }
+
         let result = await getRosterData(
             game_id,
             team_id,

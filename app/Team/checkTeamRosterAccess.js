@@ -31,7 +31,6 @@ const checkRosterAccessCheck = async (req, res, team_id, isAPI = false) => {
                 [student_id, team_id],
                 connection
             );
-            console.log(result.results);
 
             //
             if (result.results.length > 0) {
@@ -39,7 +38,7 @@ const checkRosterAccessCheck = async (req, res, team_id, isAPI = false) => {
                 return true;
             }else{
                 connection.release();
-                return false;
+                return 'Access denied';
             }
 
         }catch (e) {
@@ -47,10 +46,11 @@ const checkRosterAccessCheck = async (req, res, team_id, isAPI = false) => {
             connection.release();
         }
 
-        return student_id;
+        return 'Access denied';
+
     }
 
-    return false;
+    return 'Access denied';
 }
 
 export default checkRosterAccessCheck;

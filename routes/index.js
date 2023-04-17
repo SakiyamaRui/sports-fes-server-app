@@ -15,4 +15,11 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+import getStudentIdFromSession from '../app/User/session.js';
+router.get('/sess', async (req, res, next) => {
+  let response = await getStudentIdFromSession(req, res);
+
+  res.send(response);
+});
+
 export default router;

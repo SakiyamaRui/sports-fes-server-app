@@ -13,6 +13,7 @@ router.get('/getList', async (req, res) => {
 
         // セッションの確認
         let permissionResult = await checkRosterAccessCheck(req, res, team_id, true);
+        console.log(permissionResult)
 
         if (!permissionResult) {
             return false;

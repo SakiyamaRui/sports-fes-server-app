@@ -5,6 +5,7 @@ const checkRosterAccessCheck = async (req, res, team_id, isAPI = false) => {
     //
     let student_id = await getStudentIdFromSession(req, res, isAPI);
     let return_to = encodeURIComponent(req.protocol + '://' + req.get( 'host' ) + req.originalUrl);
+    if (req.query.return_to) return_to = req.query.return_to;
 
     if (student_id == false) {
         if (isAPI) {

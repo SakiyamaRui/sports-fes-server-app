@@ -31,7 +31,7 @@ const checkRosterAccessCheck = async (req, res, team_id, isAPI = false) => {
                 [student_id, team_id],
                 connection
             );
-            console.log(result);
+            console.log(result.results);
 
             //
             if (result.results.length > 0) {

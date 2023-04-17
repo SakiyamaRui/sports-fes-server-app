@@ -8,9 +8,7 @@ const checkRosterAccessCheck = async (req, res, team_id, isAPI = false) => {
 
     if (student_id == false) {
         if (isAPI) {
-            //
-            res.send(403);
-            res.json({
+            res.json(403, {
                 redirect: redirectTo + return_to,
             });
             return false;
@@ -27,11 +25,12 @@ const checkRosterAccessCheck = async (req, res, team_id, isAPI = false) => {
         try {
             var connection = await getConnection();
 
-            let result = query(
+            let result = await query(
                 'SELECT * FROM `rosterChangeUser` WHERE `student_id` = ? AND `team_id` = ?',
                 [student_id, team_id],
                 connection
             );
+            console.log(result);
 
             //
             if (result.results.length > 0) {

@@ -6,13 +6,13 @@ const redirectTo = "https://auth.apori.jp/redirect/microsoft?return_to="
 /**
  *  
  */
-const getStudentIdFromSession = async (req, res, isAPI) => {
+const getStudentIdFromSession = async (req, res, isAPI = false) => {
     //
     let return_url = encodeURIComponent(req.protocol + '://' + req.get( 'host' ) + req.originalUrl);
 
     if (!req.cookies.S_FES_SESS) {
-        if (isAPI) res.redirect(redirectTo + return_url);
-        return {result: false, redirect: edirectTo + return_url};
+        if (!isAPI) res.redirect(redirectTo + return_url);
+        return false;
     }
 
     try {

@@ -26,6 +26,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+
+app.use('/regist/accessdenied', (req, res) => {
+  res.sendFile(__dirname + '/public/regist/accessdenied.html');
+});
+
 // APIルートの設定
 import APIRoutes from './routes/api/index.js'
 app.use('/api', APIRoutes);

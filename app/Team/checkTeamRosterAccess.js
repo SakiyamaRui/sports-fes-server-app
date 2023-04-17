@@ -21,6 +21,7 @@ const checkRosterAccessCheck = async (req, res, team_id, isAPI = false) => {
     }
 
     //
+    console.log(team_id);
     if (typeof student_id == 'string') {
         //
         try {

@@ -1,4 +1,4 @@
-import { getConnection } from "../DB/database.js";
+import { getConnection, query } from "../DB/database.js";
 import getStudentIdFromSession, { redirectTo } from "../User/session.js";
 
 const checkRosterAccessCheck = async (req, res, team_id, isAPI = false) => {

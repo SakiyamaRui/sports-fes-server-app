@@ -1,4 +1,3 @@
-import { urlencoded } from "express";
 import { redirectTo } from "./session.js";
 import { query } from "../DB/database.js";
 import getSessionDBConnection from "../DB/session.js";
@@ -16,7 +15,7 @@ const isLogin = async (req, res, isAPI = false) => {
     if (!req.cookies.S_FES_SESS) {
         if (isAPI) {
             // リダイレクトリクエストを送信
-            res.sendStatusCode(403);
+            res.sendStatus(403);
             res.json({
                 response: 'Not Login',
                 redirectTo: redirectURL

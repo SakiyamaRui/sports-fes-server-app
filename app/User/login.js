@@ -16,6 +16,7 @@ const isLogin = async (req, res, isAPI = false) => {
     if (!req.cookies.S_FES_SESS) {
         if (isAPI) {
             // リダイレクトリクエストを送信
+            res.sendStatusCode(403);
             res.json({
                 response: 'Not Login',
                 redirectTo: redirectURL

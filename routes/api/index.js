@@ -17,4 +17,8 @@ router.use('/points', Points);
 
 router.use('/game', Game);
 
+router.use('/v', (req, res) => {
+    res.send('Version: 1.0.0');
+})
+
 export default router;

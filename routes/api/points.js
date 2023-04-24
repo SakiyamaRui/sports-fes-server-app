@@ -38,16 +38,18 @@ router.use('/personal', async (req, res) => {
     // 
     try {
         let DBResponse = await query(
-            "SELECT `userPoints`.`point_id`, `userPointLabel`.`label_name` as label, `userPoints`.`grant_time` as date, `userPoints`.`point` FROM `userPoints` INNER JOIN `userPointLabel` ON `userPoints`.`label_id` = `userPointLabel`.`label_id` WHERE `userPoints`.`student_id` = ? AND `userPoints`.`deleted` = 0 AND ( `userPoints`.`point_type` = 0 OR `userPoints`.`point_type` = 1 ) ORDER BY `userPoints`.`grant_time` LIMIT 150",
+            "SELECT `userPoints`.`point_id`, `userPointLabel`.`label_name` as label, `userPoints`.`grant_time` as date, `userPoints`.`point` FROM `userPoints` INNER JOIN `userPointLabel` ON `userPoints`.`label_id` = `userPointLabel`.`label_id` WHERE `userPoints`.`student_id` = ? AND `userPoints`.`deleted` = 0 AND ( `userPoints`.`point_type` = 0 OR `userPoints`.`point_type` = 1 ) ORDER BY `userPoints`.`grant_time` DESC, `userPoints`.`point_id` DESC LIMIT 150",
             [result],
             connection
         );
 
         res.json(DBResponse.results);
+        connection.release();
         return false;
     }catch (e) {
         console.log(e);
         res.send(500);
+        connection.release();
         return false;
     }
 });

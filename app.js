@@ -31,6 +31,10 @@ app.use('/regist/accessdenied', (req, res) => {
   res.sendFile(__dirname + '/public/regist/accessdenied.html');
 });
 
+app.use('/game', (req, res) => {
+  res.sendFile(__dirname + '/public/game/index.html');
+});
+
 // APIルートの設定
 import APIRoutes from './routes/api/index.js'
 app.use('/api', APIRoutes);

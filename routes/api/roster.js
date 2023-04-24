@@ -33,9 +33,11 @@ router.get('/getList', async (req, res) => {
 
         if (!result) {
             res.send(403);
+            return false;
         }
 
         res.json(result);
+        return true;
     }catch (e) {
         console.log(e)
         res.send(404);
@@ -53,9 +55,11 @@ router.use('/changeRoster', async (req, res) => {
 
         if (!result) {
             res.send(403);
+            return false;
         }
 
         res.json(result);
+        return true;
     }catch (e) {
         //
         console.log(e);

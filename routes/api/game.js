@@ -11,14 +11,14 @@ const setStundentIdCookie = async (req, res) => {
             //
             let student_id = await isLogin(req, res, true);
 
-            if (result == false) {
+            if (student_id == false) {
                 // ログインページへリダイレクト
                 return false;
-            }else if (result == 'error') {
+            }else if (student_id == 'error') {
                 // エラーのためページを返す
                 res.sendStatus(500);
                 return false;
-            }else if (result == 403) {
+            }else if (student_id == 403) {
                 res.sendStatus(403);
                 return false;
             }
@@ -27,15 +27,18 @@ const setStundentIdCookie = async (req, res) => {
             res.cookie('USER_ID', student_id, {
                 maxAge: 1000 * 60 * 60 * 48,
                 httpOnly: true,
+                secure: true,
                 sameSite: 'None',
             });
+
+            return student_id;
         }catch (e) {
             throw e;
         }
+    }else{
+        // 含まれている場合
+        return req.cookies.USER_ID;
     }
-
-    // 含まれている場合
-    return req.cookies.USER_ID;
 }
 
 const getOddz = async (pre_g_id, connection) => {
@@ -93,12 +96,13 @@ const getOddz = async (pre_g_id, connection) => {
 router.use('/vote', async (req, res, next) => {
     
     try {
-        var student_id = await setStundentIdCookie();
+        var student_id = await setStundentIdCookie(req, res);
 
         if (!student_id) {
             return false;
         }
     }catch (err) {
+        console.log(err);
         res.sendStatus(500).send({
             result: 'false',
         });
@@ -213,6 +217,8 @@ router.use('/vote', async (req, res, next) => {
     }
 });
 
+router.use((req, res) => {});
+
 router.use('/getStatus', async (req, res) => {
     
     try {
@@ -223,6 +229,7 @@ router.use('/getStatus', async (req, res) => {
         }
 
     }catch (err) {
+        console.log(err);
         res.sendStatus(500);
         return false;
     }

@@ -26,6 +26,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+// APIルートの設定
+import APIRoutes from './routes/api/index.js'
+app.use('/api', APIRoutes);
+
 
 app.use('/regist/accessdenied', (req, res) => {
   res.sendFile(__dirname + '/public/regist/accessdenied.html');
@@ -34,10 +38,6 @@ app.use('/regist/accessdenied', (req, res) => {
 app.use('/game', (req, res) => {
   res.sendFile(__dirname + '/public/game/index.html');
 });
-
-// APIルートの設定
-import APIRoutes from './routes/api/index.js'
-app.use('/api', APIRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

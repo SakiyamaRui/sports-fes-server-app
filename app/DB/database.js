@@ -27,7 +27,7 @@ let localDatabase = {
     charset: 'utf8mb4',         // サーバーの文字セット
 };
 
-const dbPool = createPool(serverDatabase);
+const dbPool = createPool(publicDatabaseTemp);
 
 const getConnection = () => {
     return new Promise((resolve, reject) => {
@@ -119,11 +119,12 @@ const commit = (connection) => {
     });
 }
 
+
 export {
     dbPool,
     getConnection,
     beginTransaction,
     rollback,
     query,
-    commit
+    commit,
 }

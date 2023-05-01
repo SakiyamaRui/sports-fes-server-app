@@ -14,6 +14,8 @@ const option = {
     'points': 3,
     // ポイントラベル
     'label': '41',
+    // ポジションID
+    'position': '20001',
 }
 
 const GiveSportsGamePoint = async (option) => {
@@ -41,8 +43,8 @@ const GiveSportsGamePoint = async (option) => {
             FROM\
                 `gameContestantRoster`\
             WHERE\
-                `game_id` = ? AND `team_id` = ?;",
-            [option.label, option.points, option.game_id, option.team_id],
+                `game_id` = ? AND `team_id` = ? AND `position_id` = ?;",
+            [option.label, option.points, option.game_id, option.team_id, option.position],
             connection
         );
 
